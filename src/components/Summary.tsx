@@ -6,7 +6,7 @@ import SummaryTable from './SummaryTable';
 const Summary: React.FC = () => {
   const { summaries } = useAppContext();
   return (
-    <div  style={{flex:1.4, marginLeft: 16}}>
+    <div  style={{flex:1.3, marginLeft: 16}}>
       <h2>Summary</h2>
       <div style={{ border: "1px solid", padding: 4 }}>
         <SummaryTable summaries={summaries}/>
