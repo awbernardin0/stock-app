@@ -4,17 +4,15 @@ import { Stock, useAppContext } from "../context/AppContext";
 import PauseResumeButton from "./PauseResumeButton";
 
 const Log: React.FC = () => {
-  const { log, updateLog, isPaused } = useAppContext();
+  const { log, updateLog } = useAppContext();
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (!isPaused) {
-        updateLog(); // Fetch and update log
-      }
+      updateLog(); // Fetch and update log
     }, 2000);
 
     return () => clearInterval(interval); // Cleanup on component unmount
-  }, [updateLog, isPaused]);
+  }, [updateLog]);
 
   const renderStocks = (stocks: Stock[]) => {
     return (
@@ -29,7 +27,7 @@ const Log: React.FC = () => {
   };
 
   return (
-    <div style={{flex:1, marginLeft: 16}}>
+    <div style={{ flex: 1, marginLeft: 16 }}>
       <div
         style={{
           display: "flex",
@@ -38,11 +36,11 @@ const Log: React.FC = () => {
         <h2 style={{ flex: 1 }}>Log</h2>
         <PauseResumeButton />
       </div>
-      <div style={{ border: "1px solid", padding: 4 }} >
+      <div style={{ border: "1px solid", padding: 4 }}>
         {log.map((item, index) => {
           return (
             <div key={index}>
-              <div style={{marginTop: 16}}>Updates for {item.date}</div>
+              <div style={{ marginTop: 16 }}>Updates for {item.date}</div>
               {renderStocks(item.stocks)}
             </div>
           );

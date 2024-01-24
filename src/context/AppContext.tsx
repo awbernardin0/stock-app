@@ -69,7 +69,6 @@ export const AppProvider: React.FC<MyComponentProps> = ({ children }) => {
 
   useEffect(() => {
     // Update summaries whenever the log changes
-    // You can replace computeSummary with your actual calculation function
     setSummaries(computeSummary(log));
   }, [log]);
 
@@ -86,7 +85,13 @@ export const AppProvider: React.FC<MyComponentProps> = ({ children }) => {
     const newLog: StockEntries = {date: dateNow, stocks: data}
 
     // Update the log with the fetched data
-    setLog([newLog, ...log]);
+    if (!isPaused) {
+      setLog([newLog, ...log]);
+    }
+
+    // Update summaries whenever the log changes
+    setSummaries(computeSummary([newLog, ...log]));
+    
     } catch (error) {
     console.error('Error fetching data:', error);
     }
